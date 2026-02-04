@@ -1,0 +1,32 @@
+Food
+- name - string
+- description - string
+- price (in cents) - number
+- restaurant - refer to restaurantID
+- image - imagekit
+
+user
+- username (unique) - string
+- mail (unique) - string
+- password - string
+- role - [USER|ADMIN]
+- fname - string
+- lname - string
+- addresses - array
+// - isAdmin - boolean
+- cart - array (food)
+- image - imagekit
+
+partner (restaurant)
+- name - string
+- mail (unique) - string
+- password - string
+- food - array
+- address - string
+- image - imagekit
+- rating - number
+
+
+auth
+username
+password
