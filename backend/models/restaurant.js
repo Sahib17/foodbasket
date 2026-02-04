@@ -2,18 +2,30 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const partnerSchema = new Schema({
+const restaurantSchema = new Schema({
     name: {
         type: String,
         required: true,
+        trim: true,
     },
     address: {
         type: String,
         required: true,
+        trim: true,
+    },
+    contactNumber: {
+        type: Number,
+        required: true,
+        trim: true,
+    },
+    contactEmail: {
+        type: String,
+        trim: true,
     },
     email: {
         type: String,
         required: true,
+        trim: true,
     },
     password: {
         type: String,
@@ -31,4 +43,4 @@ const partnerSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('user', userSchema)
+module.exports = mongoose.model('Restaurant', restaurantSchema)

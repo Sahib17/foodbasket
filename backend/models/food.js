@@ -2,29 +2,20 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-    firstName: {
+const foodSchema = new Schema({
+    Name: {
         type: String,
         required: true,
     },
-    lastName: {
+    description: {
         type: String,
-        required: true,
     },
     email: {
         type: String,
         required: true,
     },
-    password: {
-        type: String,
-        required: true,
-    },
     image: {
         type: String,
-    },
-    cart: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "cart",
     },
     inStock: {
         type: Boolean,
@@ -34,7 +25,13 @@ const userSchema = new Schema({
     price: {
         type: Number,
         required: true,
+    },
+    rating: {
+        type: Number,
+    },
+    restaurant:{
+        
     }
 })
 
-module.exports = mongoose.model('user', userSchema)
+module.exports = mongoose.model('Food', foodSchema)
