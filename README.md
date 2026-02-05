@@ -6,4 +6,5 @@ mongoose
 cors
 brcypt
 jsonwebtoken
+cookie-parser
 ```
