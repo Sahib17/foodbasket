@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import axios from "axios";
+import { useEffect } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  useEffect(() => {
+    const login = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/login",
+          {
+            email: "sahibjeet.user1@example.com",
+            password: "UserPass123"
+          },
+          {
+            withCredentials: true
+          }
+        );
+
+        console.log("Login Success:", response.data);
+      } catch (error) {
+        console.log("Login Error:", error.response?.data || error.message);
+      }
+    };
+
+    login();
+  }, []);
+
+  return <div>Check console for login result</div>;
 }
 
-export default App
+export default App;

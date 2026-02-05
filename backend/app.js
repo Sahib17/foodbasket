@@ -2,6 +2,8 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 
 const express = require("express");
+const cors = require("cors");
+
 
 // PUBLIC Routes
 const publicRoutes = require("./routes/public");
@@ -15,6 +17,11 @@ const publicRoutes = require("./routes/public");
 const app = express();
 
 app.use(express.json());
+app.use(cors({
+  origin: "http://localhost:5173", // your React port
+  credentials: true
+}));
+
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
