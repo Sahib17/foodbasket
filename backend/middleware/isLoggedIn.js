@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
-require('dotenv').config();
 
 function isLoggedIn(req, res, next){
     if (!req.cookies.token){

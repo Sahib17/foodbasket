@@ -1,37 +1,43 @@
+// ENV
 require("dotenv").config();
-const mongoose = require("mongoose");
 
+// Requirements
+const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 
 
-// PUBLIC Routes
+// Importing Modules
 const publicRoutes = require("./routes/public");
-
-// PROTECTED Routes
 // const userRoutes = require("./routes/user");
 // const restaurantRoutes = require("./routes/restaurant");
 // const adminRoutes = require("./routes/admin");
 
-
+// Express App
 const app = express();
 
+// Middleware - Parse JSON
 app.use(express.json());
+
+// Middleware - CORS
 app.use(cors({
   origin: "http://localhost:5173", // your React port
-  credentials: true
+  credentials: true, // Yes, send cookies/authentication headers
 }));
 
+// Middleware - requesting path and method
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
 
-app.use('/api', publicRoutes);
+// Routes
+app.use('/api/public', publicRoutes);
 // app.use("/api/users", userRoutes);
 // app.use("/api/restaurants", restaurantRoutes);
 // app.use("/api/admin", adminRoutes);
 
+// Connect to MongoDB
 mongoose
   .connect(process.env.MONGODB)
   .then(() => {
@@ -44,6 +50,6 @@ mongoose
     console.log(error);
   });
 
-app.get("/", (req, res) => {
-  console.log('hi')
+app.get("/api/", (req, res) => {
+  res.send('The backend is running!')
 });

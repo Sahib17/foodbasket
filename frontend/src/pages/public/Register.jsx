@@ -23,7 +23,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Register Data:", formData);
-    axios.post("http://localhost:3000/api/register", formData);
+    axios.post("http://localhost:3000/api/public/register", formData);
   };
 
   return (

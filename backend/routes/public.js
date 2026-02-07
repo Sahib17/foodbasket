@@ -1,6 +1,8 @@
+// Requirements
 const express = require("express");
 const router = express.Router();
 
+// Reference to Controllers
 const {
   createUser,
   loginUser,
@@ -8,13 +10,12 @@ const {
 } = require("../controllers/public/index");
 
 // CREATE user
-// router.post("/", createUser);
 router.post("/register", createUser);
 
 // LOGIN user
 router.post("/login", loginUser);
 
-// LOGIN user
+// LOGOUT user
 router.post("/logout", logoutUser);
 
 module.exports = router;
