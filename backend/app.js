@@ -27,7 +27,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', publicRoutes);
+app.use('/api', publicRoutes);
 // app.use("/api/users", userRoutes);
 // app.use("/api/restaurants", restaurantRoutes);
 // app.use("/api/admin", adminRoutes);

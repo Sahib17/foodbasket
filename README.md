@@ -8,4 +8,5 @@ brcypt
 jsonwebtoken
 cookie-parser
 cors
+crypto
 ```

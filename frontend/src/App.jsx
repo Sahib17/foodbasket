@@ -1,32 +1,21 @@
-import axios from "axios";
-import { useEffect } from "react";
+import React from 'react'
+import {Route, Routes} from 'react-router-dom';
+import Home from './pages/public/Home';
+import Login from './pages/public/Login';
+import Register from './pages/public/Register';
 
-function App() {
 
-  useEffect(() => {
-    const login = async () => {
-      try {
-        const response = await axios.post(
-          "http://localhost:3000/login",
-          {
-            email: "sahibjeet.user1@example.com",
-            password: "UserPass123"
-          },
-          {
-            withCredentials: true
-          }
-        );
+const App = () => {
+  return (
+    <>
+    <Routes>
+      <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+      <Route path='/register' element={<Register />} />
 
-        console.log("Login Success:", response.data);
-      } catch (error) {
-        console.log("Login Error:", error.response?.data || error.message);
-      }
-    };
-
-    login();
-  }, []);
-
-  return <div>Check console for login result</div>;
+    </Routes>
+    </>
+  )
 }
 
-export default App;
+export default App

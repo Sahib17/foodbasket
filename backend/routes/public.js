@@ -8,7 +8,7 @@ const {
 } = require("../controllers/public/index");
 
 // CREATE user
-router.post("/", createUser);
+// router.post("/", createUser);
 router.post("/register", createUser);
 
 // LOGIN user

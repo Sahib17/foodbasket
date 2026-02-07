@@ -3,55 +3,45 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const userModel = require("../../models/user");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 
 const createUser = async (req, res) => {
-  const { firstName, lastName, email, password, image, role } = req.body;
+  try {
+    const { firstName, lastName, email, password, image, role } = req.body;
 
-  let emptyFields = [];
+    if (!firstName || !lastName || !email || !password) {
+      return res.status(400).json({ message: "Missing fields" });
+    }
 
-  if (!firstName) emptyFields.push("firstname");
-  if (!lastName) emptyFields.push("lastname");
-  if (!email) emptyFields.push("lastname");
-  if (!password) emptyFields.push("lastname");
+    const existingUser = await userModel.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already registered" });
+    }
 
-  if (emptyFields.length > 0) {
-    return res
-      .status(400)
-      .json({ error: "please fill in all the fields ", emptyFields });
-  }
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-  let user = await userModel.findOne({ email });
-  if (user) {
-    return res.status(500).json({ message: "user already registered" });
-  } else {
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(password, salt, async (err, hash) => {
-        try{
-        let user = await userModel.create({
-          firstName,
-          lastName,
-          email,
-          password: hash,
-          image,
-          role,
-        });
-        
-        let token = jwt.sign(
-          {
-            email,
-            userid: user._id,
-          },
-          process.env.SECRET,
-        );
-        return res.cookie('token', token).status(200).json({user})
-        } catch(error){
-            res.status(400).json({message: 'some err'})
-        }
-        
-        
-      });
+    const user = await userModel.create({
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+      image,
+      role,
     });
+
+    const token = jwt.sign(
+      { email, userid: user._id },
+      process.env.SECRET
+    );
+
+    res.cookie("token", token, { httpOnly: true });
+    return res.status(200).json({ user });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server error" });
   }
 };
+
 
 module.exports = createUser;
