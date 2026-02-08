@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import axios from 'axios'
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -14,10 +16,19 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login Data:", formData);
-    // later: axios.post("/login", formData)
+    // console.log("Login Data:", formData);
+    try{
+      const res = await axios.post("http://localhost:3000/api/public/login", formData, {withCredentials: true});
+      console.log(res.data);
+      navigate('/home')
+      
+    } catch (err){
+      console.error(err.response?.data || err.message);
+    }
+    
+
   };
 
   return (
@@ -29,7 +40,6 @@ const Login = () => {
         <p className="text-center text-gray-500 mt-2">
           Login to continue shopping
         </p>
-
         <form onSubmit={handleSubmit} className="mt-8 space-y-5">
           <div>
             <label className="block text-sm font-medium text-gray-600">

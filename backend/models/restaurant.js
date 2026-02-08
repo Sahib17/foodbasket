@@ -2,20 +2,20 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const restaurantSchema = new Schema(        // name
-  {                                         //
-    name: {                                 //
-      type: String,                         //
-      required: true,
-      trim: true,
-    },
+const restaurantSchema = new Schema(        // name: String
+  {                                         // address: String
+    name: {                                 // contactNumber: String
+      type: String,                         // contactEmail: String
+      required: true,                       // owner: id user
+      trim: true,                           // image: String
+    },                                      // rating: Number
     address: {
       type: String,
       required: true,
       trim: true,
     },
     contactNumber: {
-      type: Number,
+      type: String,
       required: true,
       trim: true,
     },

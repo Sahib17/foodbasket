@@ -1,18 +1,21 @@
+// requirements
 const jwt = require("jsonwebtoken");
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
 
 function isLoggedIn(req, res, next){
-    if (!req.cookies.token){
+
+    // if no cookies, say unauthorised
+    if (!req.cookies || !req.cookies.token){
         return res.status(401).json({message: 'Unauthorised'});
     }
+
+    // try verifying the token, if success, go to next and also parse user details
     try{
         let data = jwt.verify(req.cookies.token, process.env.SECRET);
         req.user = data;
         next();
     }
     catch(error){
-        return res.status(400).json({message: 'invalid token'});
+        return res.status(401).json({message: 'invalid token'});
     }
 }
 

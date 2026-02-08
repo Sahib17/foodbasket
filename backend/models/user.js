@@ -30,7 +30,7 @@ const userSchema = new Schema(          // *firstname: String
     },
     role: {
       type: String,
-      enum: ["USER", "ADMIN", "RESTAURANT_OWNER"],
+      enum: ["USER", "ADMIN", "RESTAURANT_OWNER", "BANNED_USER"],
       default: "USER",
     },
     refreshToken: {

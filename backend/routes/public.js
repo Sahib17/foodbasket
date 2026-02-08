@@ -1,6 +1,9 @@
 // Requirements
 const express = require("express");
 const router = express.Router();
+const isLoggedIn = require("../middleware/isLoggedIn");
+const isAdmin = require("../middleware/isAdmin");
+
 
 // Reference to Controllers
 const {
@@ -17,5 +20,9 @@ router.post("/login", loginUser);
 
 // LOGOUT user
 router.post("/logout", logoutUser);
+
+router.get('/test', isLoggedIn, isAdmin, (req, res) => {
+  res.send(req.user)
+})
 
 module.exports = router;

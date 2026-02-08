@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Home = () => {
+const LandingPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -85,4 +85,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default LandingPage;

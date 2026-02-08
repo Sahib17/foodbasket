@@ -5,19 +5,20 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
-
+const cookieParser = require("cookie-parser");
 
 // Importing Modules
 const publicRoutes = require("./routes/public");
-// const userRoutes = require("./routes/user");
-// const restaurantRoutes = require("./routes/restaurant");
-// const adminRoutes = require("./routes/admin");
+const userRoutes = require("./routes/user");
+const restaurantRoutes = require("./routes/restaurant");
+const adminRoutes = require("./routes/admin");
 
 // Express App
 const app = express();
 
 // Middleware - Parse JSON
 app.use(express.json());
+app.use(cookieParser());
 
 // Middleware - CORS
 app.use(cors({
@@ -33,9 +34,9 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api/public', publicRoutes);
-// app.use("/api/users", userRoutes);
-// app.use("/api/restaurants", restaurantRoutes);
-// app.use("/api/admin", adminRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/restaurants", restaurantRoutes);
+app.use("/api/admins", adminRoutes);
 
 // Connect to MongoDB
 mongoose
