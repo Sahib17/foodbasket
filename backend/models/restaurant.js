@@ -30,6 +30,7 @@ const restaurantSchema = new Schema(        // name: String
     },
     image: {
       type: String,
+      default: "https://media.istockphoto.com/id/148291529/photo/restaurant-signage.jpg?s=612x612&w=0&k=20&c=st4S1W9K0_JmpeEY0fVVKPT2Ve8xDwuebSY9xQPqcRE="
     },
     rating: {
       type: Number,

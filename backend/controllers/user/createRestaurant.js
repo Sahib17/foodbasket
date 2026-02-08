@@ -14,7 +14,7 @@ const createRestaurant = async (req, res) => {
       contactEmail,
       owner: req.user.userid,
     });
-    const user = await userModel.findOne({ email: req.user.email });
+    const user = await userModel.findOne({ _id: req.user.userid });
     if (user.role !== "ADMIN") {
       user.role = "RESTAURANT_OWNER";
       await user.save();
