@@ -6,6 +6,8 @@ const isAdmin = async (req, res, next) => {
     const existingUser = await user.findOne({ email: req.user.email });
     console.log(existingUser);
     console.log(existingUser.role);
+    console.log(req.user.userid);
+    
     
   if (existingUser.role === "ADMIN") {
     return next();
