@@ -21,8 +21,8 @@ router.post("/login", loginUser);
 // LOGOUT user
 router.post("/logout", logoutUser);
 
-router.get('/test', isLoggedIn, isAdmin, (req, res) => {
-  res.send(req.user)
+router.get('/test', (req, res) => {
+  res.send('hi')
 })
 
 module.exports = router;

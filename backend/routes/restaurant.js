@@ -5,11 +5,13 @@ const isRestaurantOwner = require("../middleware/isRestaurantOwner");
 
 // Reference to Controllers
 const {
-  test,
+  test, createFood
 } = require("../controllers/restaurantOwner/index");
 
 
 // CREATE food
 router.get('/test', isLoggedIn, isRestaurantOwner, test);
+
+router.post('/createFood', isLoggedIn, isRestaurantOwner, createFood)
 
 module.exports = router;
