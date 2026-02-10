@@ -10,8 +10,8 @@ const {
 
 
 // CREATE food
-router.get('/test', isLoggedIn, isRestaurantOwner, test);
+router.get('/:id/test', isLoggedIn, isRestaurantOwner, test);
 
-router.post('/createFood', isLoggedIn, isRestaurantOwner, createFood)
+router.post('/:id/createFood', isLoggedIn, isRestaurantOwner, createFood)
 
 module.exports = router;

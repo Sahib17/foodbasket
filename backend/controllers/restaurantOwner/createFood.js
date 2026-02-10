@@ -11,12 +11,12 @@ const createFood = async (req, res) => {
       description,
       price,
       image,
-      restaurant,
+      restaurant: req.params.id,
       isAvailable,
     });
-    res.status(201).json({ message: food });
+    res.status(201).json({ success: true, message: food });
   } catch (error) {
-    res.status(400).json({ message: error });
+    res.status(500).json({ message: error });
   }
 };
 
