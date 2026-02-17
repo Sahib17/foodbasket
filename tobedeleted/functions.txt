@@ -1,0 +1,26 @@
+PUBLIC
+/ create USER
+/ login USER
+/ logout USER
+
+USER
+/ create RESTAURANT
+/ get FOOD
+/ get RESTAURANTS
+- create CART
+- update CART
+- delete CART
+
+RESTAURANT
+/ create FOOD
+/ update FOOD
+- update RESTAURANT
+- delete FOOD
+
+FOOD
+
+ADMIN
+- assign ADMIN
+- delete RESTAURANT
+- delete USER
+- 

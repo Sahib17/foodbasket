@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const foodModel = require("./food");
 
 const Schema = mongoose.Schema;
 
@@ -39,5 +40,12 @@ const restaurantSchema = new Schema(        // name: String
   },
   { timestamps: true },
 );
+
+restaurantSchema.pre("findOneAndDelete", async function (next) {
+  const restaurantId = this.getQuery()._id;
+  await foodModel.deleteMany({ restaurant: restaurantId });
+  next();
+});
+
 
 module.exports = mongoose.model("Restaurant", restaurantSchema);
