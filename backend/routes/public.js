@@ -15,7 +15,7 @@ const {
 // CREATE user
 router.post("/register", createUser);
 
-app.get("/healthz", (req, res) => {
+router.get("/healthz", (req, res) => {
   res.status(200).send("OK");
 });
 
