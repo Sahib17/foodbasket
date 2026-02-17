@@ -1,11 +1,11 @@
 const restaurantModel = require("../../models/restaurant");
 const userModel = require("../../models/user");
 
-const makeAdmin = async (req, res) => {
+const banUser = async (req, res) => {
   const { id: userid } = req.params;
   
   if(req.user.userid === userid){
-    return res.status(400).json({message: "you cannot demote yourself"})
+    return res.status(400).json({message: "you cannot ban yourself"})
   }
   try {
     const user = await userModel.findById( userid );
@@ -39,4 +39,4 @@ const makeAdmin = async (req, res) => {
   }
 };
 
-module.exports = makeAdmin;
+module.exports = banUser;
