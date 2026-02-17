@@ -19,6 +19,8 @@ app.get("/healthz", (req, res) => {
   res.status(200).send("OK");
 });
 
+router.get("/imagekit-auth", imageKitAuth);
+
 // LOGIN user
 router.post("/login", loginUser);
 
