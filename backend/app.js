@@ -13,6 +13,11 @@ const userRoutes = require("./routes/user");
 const restaurantRoutes = require("./routes/restaurant");
 const adminRoutes = require("./routes/admin");
 
+const allowedOrigins = [
+  "http://localhost:5173",              // local dev
+  process.env.FRONTEND_URL              // production frontend (Vercel)
+];
+
 // Express App
 const app = express();
 
@@ -22,8 +27,16 @@ app.use(cookieParser());
 
 // Middleware - CORS
 app.use(cors({
-  origin: "http://localhost:5173", // your React port
-  credentials: true, // Yes, send cookies/authentication headers
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true); // allow Postman / server-to-server
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
 }));
 
 // Middleware - requesting path and method
