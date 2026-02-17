@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const isLoggedIn = require("../middleware/isLoggedIn");
 const isAdmin = require("../middleware/isAdmin");
+const imageKitAuth = require("../middleware/imageKitAuth");
 
 
 // Reference to Controllers
